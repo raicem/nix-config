@@ -71,6 +71,74 @@
     # EDITOR = "emacs";
   };
 
+  # Bash configuration - will auto-switch to fish on login
+  programs.bash = {
+    enable = true;
+    
+    # Auto-start fish for interactive sessions
+    bashrcExtra = ''
+      # Auto-start fish shell if available and we're in an interactive session
+      if [[ $- == *i* ]] && command -v fish >/dev/null 2>&1; then
+        # Only start fish if we're not already in fish (prevent infinite loop)
+        if [ -z "$FISH_VERSION" ]; then
+          exec fish
+        fi
+      fi
+    '';
+  };
+
+  programs.lazygit = {
+    enable = true;
+  };
+
+  # Fish shell configuration
+  programs.fish = {
+    enable = true;
+    
+    # Fish plugins
+    plugins = [
+      {
+        name = "nvm.fish";
+        src = pkgs.fetchFromGitHub {
+          owner = "jorgebucaran";
+          repo = "nvm.fish";
+          rev = "2.2.17";
+          sha256 = "sha256-BNnoP9gLQuZQt/0SOOsZaYOexNN2K7PKWT/paS0BJJY=";
+        };
+      }
+    ];
+    
+    # Interactive shell configuration
+    interactiveShellInit = ''
+      # Commands to run in interactive sessions can go here
+    '';
+    
+    # Shell aliases
+    shellAliases = {
+      wccom = "cd /Users/cemunalan/Projects/woocommerce.com";
+      wccore = "cd /Users/cemunalan/Projects/woocommerce";
+      lg = "${pkgs.lazygit}/bin/lazygit";
+    };
+    
+    # Shell init (equivalent to config.fish)
+    shellInit = ''
+      # Added by LM Studio CLI (lms)
+      set -gx PATH $PATH /Users/cemunalan/.cache/lm-studio/bin
+      
+      # Added by OrbStack: command-line tools and integration
+      # This won't be added again if you remove it.
+      source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+    '';
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Enable experimental Nix features
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
 }
