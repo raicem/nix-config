@@ -1,10 +1,14 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./gnome.nix
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "cemunalan";
-  home.homeDirectory = "/Users/cemunalan";
+  home.username = "raicem";
+  home.homeDirectory = "/home/raicem";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -14,6 +18,10 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -34,6 +42,11 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    pkgs.code-cursor
+    pkgs.zellij
+    pkgs.flameshot
+    pkgs.btop
+    pkgs.dconf-editor
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -71,20 +84,8 @@
     # EDITOR = "emacs";
   };
 
-  # Bash configuration - will auto-switch to fish on login
   programs.bash = {
     enable = true;
-    
-    # Auto-start fish for interactive sessions
-    bashrcExtra = ''
-      # Auto-start fish shell if available and we're in an interactive session
-      if [[ $- == *i* ]] && command -v fish >/dev/null 2>&1; then
-        # Only start fish if we're not already in fish (prevent infinite loop)
-        if [ -z "$FISH_VERSION" ]; then
-          exec fish
-        fi
-      fi
-    '';
   };
 
   programs.lazygit = {
