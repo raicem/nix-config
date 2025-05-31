@@ -1,10 +1,15 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./gnome.nix
+    # ./programs.nix
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "cemunalan";
-  home.homeDirectory = "/Users/cemunalan";
+  home.username = "raicem-personal";
+  home.homeDirectory = "/home/raicem-personal";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -15,25 +20,14 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
+  # Additional packages can be added here if needed
+  # Programs are now managed in programs.nix
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    # Add any system-specific packages here
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -49,6 +43,12 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  };
+
+  # XDG configuration files (files that go in ~/.config/)
+  xdg.configFile = {
+    # Ghostty terminal emulator configuration
+    "ghostty/config".source = ./dotfiles/ghostty/config;
   };
 
   # Home Manager can also manage your environment variables through
@@ -71,6 +71,45 @@
     # EDITOR = "emacs";
   };
 
+  # Program configurations (independent of how programs are installed)
+  
+  # Fish shell configuration
+  programs.fish = {
+    enable = true;
+    
+    # Interactive shell configuration
+    interactiveShellInit = ''
+      # Commands to run in interactive sessions can go here
+    '';
+    
+    # Shell aliases
+    shellAliases = {
+      lg = "lazygit";  # Use system path instead of nix store path
+      vim = "nvim";
+      vi = "nvim";
+    };
+    
+    # Shell init (equivalent to config.fish)
+    shellInit = ''
+      # Fish shell initialization
+    '';
+  };
+
+  # Git configuration
+  programs.git = {
+    enable = true;
+    userName = "raicem";
+    userEmail = "unalancem@gmail.com";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Enable experimental Nix features
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      experimental-features = [ "nix-command" ];
+    };
+  };
 }
