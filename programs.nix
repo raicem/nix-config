@@ -3,6 +3,8 @@
 {
   xdg.configFile = {
     "ghostty/config".source = ./dotfiles/ghostty/config;
+    "Code/User/settings.json".source = ./dotfiles/vscode/settings.json;
+    "Code/User/keybindings.json".source = ./dotfiles/vscode/keybindings.json;
   };
 
   programs.fish = {

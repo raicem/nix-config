@@ -1,0 +1,22 @@
+{
+    "editor.fontSize": 17,
+    "editor.fontFamily": "'JetBrains Mono', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.lineHeight": 2,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "files.autoSave": "onFocusChange",
+
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.colorTheme": "Monokai",
+
+    "keyboard.dispatch": "keyCode",
+
+    "vim.useSystemClipboard": true,
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-p>": false
+    },
+    "vim.smartRelativeLine": true
+}
