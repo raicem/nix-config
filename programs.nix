@@ -1,18 +1,29 @@
 { config, pkgs, ... }:
 
 {
-  # Program installation only - configurations live in home.nix
-  home.packages = with pkgs; [
-    # Development tools
-    lazygit
-    neovim
+  xdg.configFile = {
+    "ghostty/config".source = ./dotfiles/ghostty/config;
+  };
+
+  programs.fish = {
+    enable = true;
+
+    # Interactive shell configuration
+    interactiveShellInit = ''
+      set -U fish_greeting
+    '';
     
-    # Terminal tools
-    zellij
-    ghostty
-    
-    # GUI applications
-    code-cursor 
-    beekeeper-studio
-  ];
+    # Shell aliases
+    shellAliases = {
+      lg = "lazygit";
+      vim = "nvim";
+      vi = "nvim";
+    };
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "raicem";
+    userEmail = "unalancem@gmail.com";
+  };
 }
