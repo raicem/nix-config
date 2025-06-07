@@ -2,9 +2,10 @@
 
 {
   xdg.configFile = {
-    "ghostty/config".source = ./dotfiles/ghostty/config;
-    "Code/User/settings.json".source = ./dotfiles/vscode/settings.json;
-    "Code/User/keybindings.json".source = ./dotfiles/vscode/keybindings.json;
+    # Using mkOutOfStoreSymlink for mutable dotfiles - you can edit these directly
+    "ghostty/config".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/dotfiles/ghostty/config";
+    "Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/dotfiles/vscode/settings.json";
+    "Code/User/keybindings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/dotfiles/vscode/keybindings.json";
   };
   
   programs.vscode = {
@@ -36,5 +37,9 @@
     enable = true;
     userName = "raicem";
     userEmail = "unalancem@gmail.com";
+  };
+
+  programs.btop = {
+    enable = true;
   };
 }
