@@ -22,6 +22,9 @@
     },
     "vim.smartRelativeLine": true,
 
-    "python.analysis.inlayHints.callArgumentNames": "all",
-    "python.analysis.typeCheckingMode": "strict"
+    "python.analysis.typeCheckingMode": "strict",
+    "python.analysis.typeEvaluation.enableReachabilityAnalysis": true,
+    "python.analysis.typeEvaluation.strictDictionaryInference": true,
+    "python.analysis.typeEvaluation.strictListInference": true,
+    "python.analysis.typeEvaluation.strictSetInference": true
 }

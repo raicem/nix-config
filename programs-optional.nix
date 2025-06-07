@@ -10,9 +10,13 @@
     # Terminal tools
     zellij
     ghostty
-    
-    # GUI applications
-    code-cursor 
-    beekeeper-studio
+
+    # Programs
+    # beekeeper-studio
   ];
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.google-chrome;
+  };
 }

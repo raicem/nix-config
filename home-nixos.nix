@@ -4,7 +4,7 @@
   imports = [
     ./gnome.nix
     ./programs.nix
-    # ./programs-optional.nix
+    ./programs-optional.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
