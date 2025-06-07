@@ -25,10 +25,8 @@
     allowUnfree = true;
   };
 
-  # Additional packages can be added here if needed
-  # Programs are now managed in programs.nix
   home.packages = [
-    # Add any system-specific packages here
+    
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
