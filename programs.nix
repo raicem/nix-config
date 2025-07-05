@@ -38,4 +38,9 @@
   programs.btop = {
     enable = true;
   };
+
+  # Node.js and npm - managed through Nix instead of nvm
+  home.packages = with pkgs; [
+    nodejs_22  # Node.js 22 (latest LTS)
+  ];
 }
