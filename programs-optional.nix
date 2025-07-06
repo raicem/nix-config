@@ -9,10 +9,13 @@
     
     # Terminal tools
     zellij
-    ghostty
+    # ghostty
 
     # Programs
     # beekeeper-studio
+    yt-dlp
+    go
+    php
   ];
 
   programs.chromium = {
